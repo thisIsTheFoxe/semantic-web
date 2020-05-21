@@ -1,0 +1,22 @@
+{
+  "name": "semantic-web",
+  "version": "1.0.0",
+  "description": "Turtle and OWL ontologies",
+  "main": "index.js",
+  "scripts": {
+    "ttl": "ttl RDFS/rdfs.ttl"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thisIsTheFoxe/semantic-web.git"
+  },
+  "author": "Henrik Storch, Ingo Kuba",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/thisIsTheFoxe/semantic-web/issues"
+  },
+  "homepage": "https://github.com/thisIsTheFoxe/semantic-web#readme",
+  "dependencies": {
+    "turtle-validator": "^1.0.2"
+  }
+}
