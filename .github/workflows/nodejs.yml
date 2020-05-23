@@ -1,4 +1,4 @@
-name: Node.js application
+name: Syntax check
 
 on: [push]
 
