@@ -17,7 +17,12 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: npm install
-      - name: Check Turtle syntax
-        run: ./turtle-validator.sh
+      - name: Check RDFS syntax
+        run: ./turtle-validator.sh rdfs
         env:
           CI: true
+      - name: Check OWL syntax
+        run: ./turtle-validator.sh owl
+        env:
+          CI: true
+

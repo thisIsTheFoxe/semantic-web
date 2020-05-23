@@ -1,0 +1,358 @@
+@prefix : <https://bakerstreet.fandom.com/wiki/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <https://bakerstreet.fandom.com/wiki/> .
+
+<https://bakerstreet.fandom.com/wiki/> rdf:type owl:Ontology .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  https://bakerstreet.fandom.com/wiki/child
+:child rdf:type owl:ObjectProperty ;
+       rdfs:subPropertyOf :relationship ;
+       owl:inverseOf :parent .
+
+
+###  https://bakerstreet.fandom.com/wiki/enemy
+:enemy rdf:type owl:ObjectProperty ;
+       rdfs:subPropertyOf :relationship ;
+       rdf:type owl:SymmetricProperty ;
+       owl:propertyDisjointWith :friend .
+
+
+###  https://bakerstreet.fandom.com/wiki/friend
+:friend rdf:type owl:ObjectProperty ;
+        rdfs:subPropertyOf :relationship ;
+        rdf:type owl:SymmetricProperty .
+
+
+###  https://bakerstreet.fandom.com/wiki/gender
+:gender rdf:type owl:ObjectProperty ,
+                 owl:FunctionalProperty ;
+        rdfs:domain :Person ;
+        rdfs:range :Gender .
+
+
+###  https://bakerstreet.fandom.com/wiki/hasAffiliation
+:hasAffiliation rdf:type owl:ObjectProperty ;
+                rdfs:domain :Character ;
+                rdfs:range :Affiliation .
+
+
+###  https://bakerstreet.fandom.com/wiki/hasOccupation
+:hasOccupation rdf:type owl:ObjectProperty ;
+               rdfs:domain :Character ;
+               rdfs:range :Occupation .
+
+
+###  https://bakerstreet.fandom.com/wiki/parent
+:parent rdf:type owl:ObjectProperty ;
+        rdfs:subPropertyOf :relationship .
+
+
+###  https://bakerstreet.fandom.com/wiki/portrayedBy
+:portrayedBy rdf:type owl:ObjectProperty ;
+             owl:inverseOf :portrays ;
+             rdfs:domain :Character ;
+             rdfs:range :Actor .
+
+
+###  https://bakerstreet.fandom.com/wiki/portrays
+:portrays rdf:type owl:ObjectProperty ;
+          rdfs:domain :Actor ;
+          rdfs:range :Character .
+
+
+###  https://bakerstreet.fandom.com/wiki/relationship
+:relationship rdf:type owl:ObjectProperty ,
+                       owl:IrreflexiveProperty ;
+              rdfs:domain :Character ;
+              rdfs:range :Character .
+
+
+###  https://bakerstreet.fandom.com/wiki/sibling
+:sibling rdf:type owl:ObjectProperty ;
+         rdfs:subPropertyOf :relationship ;
+         rdf:type owl:SymmetricProperty .
+
+
+###  https://bakerstreet.fandom.com/wiki/spouse
+:spouse rdf:type owl:ObjectProperty ;
+        rdfs:subPropertyOf :relationship ;
+        rdf:type owl:SymmetricProperty .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  https://bakerstreet.fandom.com/wiki/nationality
+:nationality rdf:type owl:DatatypeProperty ;
+             rdfs:domain :Character ;
+             rdfs:range xsd:string .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  https://bakerstreet.fandom.com/wiki/Actor
+:Actor rdf:type owl:Class ;
+       rdfs:subClassOf :Person .
+
+
+###  https://bakerstreet.fandom.com/wiki/Affiliation
+:Affiliation rdf:type owl:Class .
+
+
+###  https://bakerstreet.fandom.com/wiki/Character
+:Character rdf:type owl:Class ;
+           rdfs:subClassOf :Person .
+
+
+###  https://bakerstreet.fandom.com/wiki/Gender
+:Gender rdf:type owl:Class .
+
+
+###  https://bakerstreet.fandom.com/wiki/IllegalOccupation
+:IllegalOccupation rdf:type owl:Class ;
+                   rdfs:subClassOf :Occupation ;
+                   owl:disjointWith :LegalOccupation .
+
+
+###  https://bakerstreet.fandom.com/wiki/LegalOccupation
+:LegalOccupation rdf:type owl:Class ;
+                 rdfs:subClassOf :Occupation .
+
+
+###  https://bakerstreet.fandom.com/wiki/Occupation
+:Occupation rdf:type owl:Class .
+
+
+###  https://bakerstreet.fandom.com/wiki/Person
+:Person rdf:type owl:Class .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  https://bakerstreet.fandom.com/wiki/Aaron_Richards
+:Aaron_Richards rdf:type owl:NamedIndividual ,
+                         :Actor ;
+                :gender :male ;
+                :portrays <https://bakerstreet.fandom.com/wiki/Mycroft_Holmes_(Gatiss)> ;
+                rdfs:label "Aaron Richards" .
+
+
+###  https://bakerstreet.fandom.com/wiki/Andrew_Scott
+:Andrew_Scott rdf:type owl:NamedIndividual ,
+                       :Actor ;
+              :gender :male ;
+              :portrays :Jim_Moriarty ;
+              rdfs:label "Andrew Scott" .
+
+
+###  https://bakerstreet.fandom.com/wiki/Benedict_Cumberbatch
+:Benedict_Cumberbatch rdf:type owl:NamedIndividual ,
+                               :Actor ;
+                      :gender :male ;
+                      :portrays :William_Sherlock_Scott_Holmes ;
+                      rdfs:label "Benedict Cumberbatch" .
+
+
+###  https://bakerstreet.fandom.com/wiki/British_Government
+:British_Government rdf:type owl:NamedIndividual ,
+                             :Affiliation ;
+                    rdfs:label "British Government" .
+
+
+###  https://bakerstreet.fandom.com/wiki/Chemist
+:Chemist rdf:type owl:NamedIndividual ,
+                  :LegalOccupation .
+
+
+###  https://bakerstreet.fandom.com/wiki/Criminal
+:Criminal rdf:type owl:NamedIndividual ,
+                   :IllegalOccupation .
+
+
+###  https://bakerstreet.fandom.com/wiki/Detective
+:Detective rdf:type owl:NamedIndividual ,
+                    :LegalOccupation .
+
+
+###  https://bakerstreet.fandom.com/wiki/Eurus_Holmes
+:Eurus_Holmes rdf:type owl:NamedIndividual ,
+                       :Character ;
+              :enemy :John_Watson ,
+                     :William_Sherlock_Scott_Holmes ,
+                     <https://bakerstreet.fandom.com/wiki/Mycroft_Holmes_(Gatiss)> ;
+              :friend :Jim_Moriarty ;
+              :gender :female ;
+              :hasAffiliation :Sherrinford ;
+              :hasOccupation :Criminal ;
+              :parent :Mrs_Holmes ,
+                      <https://bakerstreet.fandom.com/wiki/Mr_Holmes_(Carlton)> ;
+              :sibling :William_Sherlock_Scott_Holmes ,
+                       <https://bakerstreet.fandom.com/wiki/Mycroft_Holmes_(Gatiss)> ;
+              :nationality "British" ;
+              rdfs:label "Eurus Holmes" .
+
+
+###  https://bakerstreet.fandom.com/wiki/GovernmentOfficial
+:GovernmentOfficial rdf:type owl:NamedIndividual ,
+                             :LegalOccupation ;
+                    rdfs:label "Government official" .
+
+
+###  https://bakerstreet.fandom.com/wiki/Jim_Moriarty
+:Jim_Moriarty rdf:type owl:NamedIndividual ,
+                       :Character ;
+              :enemy :John_Watson ,
+                     :William_Sherlock_Scott_Holmes ;
+              :friend :Eurus_Holmes ;
+              :nationality "Irish" ;
+              rdfs:label "Jim Moriarty" .
+
+
+###  https://bakerstreet.fandom.com/wiki/John_Watson
+:John_Watson rdf:type owl:NamedIndividual ,
+                      :Character ;
+             :enemy :Eurus_Holmes ,
+                    :Jim_Moriarty ;
+             :friend :William_Sherlock_Scott_Holmes ;
+             :gender :male ;
+             :nationality "British" ;
+             rdfs:label "John Watson" .
+
+
+###  https://bakerstreet.fandom.com/wiki/Mark_Gatiss
+:Mark_Gatiss rdf:type owl:NamedIndividual ,
+                      :Actor ;
+             :gender :male ;
+             :portrays <https://bakerstreet.fandom.com/wiki/Mycroft_Holmes_(Gatiss)> ;
+             rdfs:label "Mark Gatiss" .
+
+
+###  https://bakerstreet.fandom.com/wiki/Mrs_Holmes
+:Mrs_Holmes rdf:type owl:NamedIndividual ,
+                     :Character ;
+            :child :Eurus_Holmes ,
+                   :William_Sherlock_Scott_Holmes ,
+                   <https://bakerstreet.fandom.com/wiki/Mycroft_Holmes_(Gatiss)> ;
+            :gender :female ;
+            :portrayedBy :Wanda_Ventham ;
+            :spouse <https://bakerstreet.fandom.com/wiki/Mr_Holmes_(Carlton)> ;
+            :nationality "British" ;
+            rdfs:label "Mrs Holmes" .
+
+
+###  https://bakerstreet.fandom.com/wiki/Physician
+:Physician rdf:type owl:NamedIndividual ,
+                    :LegalOccupation .
+
+
+###  https://bakerstreet.fandom.com/wiki/Scotland_Yard
+:Scotland_Yard rdf:type owl:NamedIndividual ,
+                        :Affiliation ;
+               rdfs:label "Scotland Yard" .
+
+
+###  https://bakerstreet.fandom.com/wiki/Sherrinford
+:Sherrinford rdf:type owl:NamedIndividual ,
+                      :Affiliation .
+
+
+###  https://bakerstreet.fandom.com/wiki/Timothy_Carlton
+:Timothy_Carlton rdf:type owl:NamedIndividual ,
+                          :Actor ;
+                 :gender :male ;
+                 :portrays <https://bakerstreet.fandom.com/wiki/Mr_Holmes_(Carlton)> ;
+                 rdfs:label "Timothy Carlton" .
+
+
+###  https://bakerstreet.fandom.com/wiki/Wanda_Ventham
+:Wanda_Ventham rdf:type owl:NamedIndividual ,
+                        :Actor ;
+               :gender :female ;
+               :portrays :Mrs_Holmes ;
+               rdfs:label "Wanda Ventham" .
+
+
+###  https://bakerstreet.fandom.com/wiki/William_Sherlock_Scott_Holmes
+:William_Sherlock_Scott_Holmes rdf:type owl:NamedIndividual ,
+                                        :Character ;
+                               :enemy :Eurus_Holmes ,
+                                      :Jim_Moriarty ;
+                               :friend :John_Watson ;
+                               :gender :male ;
+                               :hasAffiliation :Scotland_Yard ;
+                               :hasOccupation :Chemist ,
+                                              :Detective ;
+                               :parent :Mrs_Holmes ,
+                                       <https://bakerstreet.fandom.com/wiki/Mr_Holmes_(Carlton)> ;
+                               :portrayedBy :Benedict_Cumberbatch ;
+                               :sibling :Eurus_Holmes ,
+                                        <https://bakerstreet.fandom.com/wiki/Mycroft_Holmes_(Gatiss)> ;
+                               :nationality "British" ;
+                               rdfs:label "Sherlock Holmes" .
+
+
+###  https://bakerstreet.fandom.com/wiki/female
+:female rdf:type owl:NamedIndividual ,
+                 :Gender .
+
+
+###  https://bakerstreet.fandom.com/wiki/male
+:male rdf:type owl:NamedIndividual ,
+               :Gender .
+
+
+###  https://bakerstreet.fandom.com/wiki/Mr_Holmes_(Carlton)
+<https://bakerstreet.fandom.com/wiki/Mr_Holmes_(Carlton)> rdf:type owl:NamedIndividual ,
+                                                                   :Character ;
+                                                          :child :Eurus_Holmes ,
+                                                                 :William_Sherlock_Scott_Holmes ,
+                                                                 <https://bakerstreet.fandom.com/wiki/Mycroft_Holmes_(Gatiss)> ;
+                                                          :gender :male ;
+                                                          :portrayedBy :Timothy_Carlton ;
+                                                          :spouse :Mrs_Holmes ;
+                                                          :nationality "British" ;
+                                                          rdfs:label "Mr Holmes" .
+
+
+###  https://bakerstreet.fandom.com/wiki/Mycroft_Holmes_(Gatiss)
+<https://bakerstreet.fandom.com/wiki/Mycroft_Holmes_(Gatiss)> rdf:type owl:NamedIndividual ,
+                                                                       :Character ;
+                                                              :enemy :Eurus_Holmes ;
+                                                              :gender :male ;
+                                                              :hasAffiliation :British_Government ;
+                                                              :hasOccupation :GovernmentOfficial ;
+                                                              :parent :Mrs_Holmes ,
+                                                                      <https://bakerstreet.fandom.com/wiki/Mr_Holmes_(Carlton)> ;
+                                                              :portrayedBy :Aaron_Richards ,
+                                                                           :Mark_Gatiss ;
+                                                              :sibling :Eurus_Holmes ,
+                                                                       :William_Sherlock_Scott_Holmes ;
+                                                              :nationality "British" ;
+                                                              rdfs:label "Mycroft Holmes" .
+
+
+#################################################################
+#    General axioms
+#################################################################
+
+[ rdf:type owl:AllDifferent ;
+  owl:distinctMembers ( :female
+                        :male
+                      )
+] .
+
+
+###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi
