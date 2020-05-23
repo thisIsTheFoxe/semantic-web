@@ -1,0 +1,275 @@
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix bs: <https://bakerstreet.fandom.com/wiki/> .
+@prefix wp: <https://en.wikipedia.org/wiki/> .
+@prefix ebw: <https://en.everybodywiki.com/> .
+
+bs:nationality
+    a owl:DatatypeProperty ;
+    rdfs:domain bs:Character;
+    rdfs:range xsd:string ;
+    rdfs:label "Nationality" ;
+    rdfs:comment "The nationality of a character." .
+
+bs:affiliation
+    a owl:ObjectProperty ;
+    rdfs:domain bs:Character;
+    rdfs:label "Affiliation" ;
+    rdfs:comment "The affiliation of a character." .
+
+bs:occupation
+    a owl:ObjectProperty ;
+    rdfs:domain bs:Character;
+    rdfs:label "Occupation" ;
+    rdfs:comment "The occupation of a character." .
+
+bs:portrayedBy
+    a owl:ObjectProperty , owl:AsymmetricProperty , owl:IrreflexiveProperty ;
+    owl:complementOf bs:portrays ;
+    rdfs:domain bs:Character ;
+    rdfs:label "Portrayed by" ;
+    rdfs:comment "List of actors playing a character." .
+
+bs:portrays
+    a owl:ObjectProperty , owl:AsymmetricProperty , owl:IrreflexiveProperty ;
+    owl:complementOf bs:portrayedBy ;
+    rdfs:domain bs:Actor ;
+    rdfs:label "Portrays" ;
+    rdfs:comment "List of characters this actor plays." .
+
+bs:Person
+    a owl:Class ;
+    rdfs:label "Person" .
+
+bs:Character
+    a bs:Person ;
+    rdfs:subClassOf [ a bs:Person ; owl:complementOf bs:Actor ] ;
+    rdfs:label "Character" ;
+    rdfs:comment "Defines a person as a character of the show." .
+
+bs:Actor
+    a bs:Person ;
+    rdfs:subClassOf [ a bs:Person ; owl:complementOf bs:Character ] ;
+    rdfs:label "Actor" ;
+    rdfs:comment "Defines a person as an actor of a character." .
+
+bs:Relationship
+    a owl:ObjectProperty , owl:AsymmetricProperty , owl:IrreflexiveProperty ;
+    rdfs:domain bs:Character ;
+    rdfs:label "Relationship" ;
+    rdfs:comment "Describes the relationship between two characters." .
+
+bs:relationshipCharacter
+    a owl:ObjectProperty ;
+    rdfs:domain bs:Relationship ;
+    rdfs:range bs:Character ;
+    rdfs:label "Relationship character" ;
+    rdfs:comment "Relation to the character." .
+
+bs:relationshipType
+    a owl:ObjectProperty ;
+    rdfs:domain bs:Relationship ;
+    rdfs:range [ owl:unionOf(bs:sibling bs:parent bs:partner bs:child bs:enemy bs:friend) ] ;
+    rdfs:label "Relationship type" ;
+    rdfs:comment "Describes the type of relationship." .
+
+bs:sibling
+    a owl:DatatypeProperty ;
+    rdfs:domain bs:relationshipType ;
+    rdfs:label "sibling" .
+
+bs:parent
+    a owl:DatatypeProperty ;
+    owl:complementOf bs:child ;
+    rdfs:domain bs:relationshipType ;
+    rdfs:label "parent" .
+
+bs:partner
+    a owl:DatatypeProperty ;
+    rdfs:domain bs:relationshipType ;
+    rdfs:label "partner" .
+
+bs:child
+    a owl:DatatypeProperty ;
+    owl:complementOf bs:parent ;
+    rdfs:domain bs:relationshipType ;
+    rdfs:label "child" .
+
+bs:enemy
+    a owl:DatatypeProperty ;
+    owl:complementOf bs:friend ;
+    rdfs:domain bs:relationshipType ;
+    rdfs:label "enemy" .
+
+bs:friend
+    a owl:DatatypeProperty ;
+    owl:complementOf bs:enemy ;
+    rdfs:domain bs:relationshipType ;
+    rdfs:label "friend" .
+
+bs:gender
+    a owl:ObjectProperty ;
+    rdfs:domain bs:Person ;
+    rdfs:range [ owl:unionOf(bs:male bs:female) ] ;
+    rdfs:label "Gender" ;
+    rdfs:comment "Gender of a actor or character." .
+
+bs:male
+    a owl:DatatypeProperty ;
+    owl:complementOf bs:female ;
+    rdfs:domain bs:gender ;
+    rdfs:label "male" .
+
+bs:female
+    a owl:DatatypeProperty ;
+    owl:complementOf bs:male ;
+    rdfs:domain bs:gender ;
+    rdfs:label "female" .
+
+bs:Sherlock_Holmes
+    a bs:Character ;
+    owl:sameAs wp:Sherlock_Holmes ;
+    #uri <https://bakerstreet.fandom.com/wiki/William_Sherlock_Scott_Holmes> ;
+    rdfs:label "Sherlock Holmes" ;
+    bs:gender bs:male ;
+    bs:nationality "British" ;
+    bs:affiliation "New Scotland Yard" ;
+    bs:occupation "Chemist", "Consulting Detective" ;
+    bs:portrayedBy bs:Benedict_Cumberbatch, bs:Louis_Moffat, ebw:Tom_Stoughton ;
+    bs:Relationship [ bs:relationshipCharacter bs:Mr_Holmes ; bs:relationshipType bs:parent ] ;
+    bs:Relationship [ bs:relationshipCharacter bs:Mrs_Holmes ; bs:relationshipType bs:parent ] ;
+    bs:Relationship [ bs:relationshipCharacter bs:Mycroft_Holmes ; bs:relationshipType bs:sibling ] ;
+    bs:Relationship [ bs:relationshipCharacter bs:Eurus_Holmes ; bs:relationshipType bs:sibling, bs:enemy ] ;
+    bs:Relationship [ bs:relationshipCharacter bs:John_Watson ; bs:relationshipType bs:friend ] ;
+    bs:Relationship [ bs:relationshipCharacter bs:Jim_Moriarty ; bs:relationshipType bs:enemy ] .
+
+bs:Benedict_Cumberbatch
+    a bs:Actor ;
+    owl:sameAs wp:Benedict_Cumberbatch ;
+    rdfs:label "Benedict Cumberbatch" ;
+    bs:gender bs:male ;
+    bs:portrays bs:Sherlock_Holmes .
+
+bs:Louis_Moffat
+    a bs:Actor ;
+    rdfs:label "Louis Moffat" ;
+    bs:gender bs:male ;
+    bs:portrays bs:Sherlock_Holmes .
+
+bs:Mr_Holmes
+    a bs:Character ;
+    #uri <https://bakerstreet.fandom.com/wiki/Mr_Holmes_(Carlton)> ;
+    rdfs:label "Mr Holmes" ;
+    bs:gender bs:male ;
+    bs:nationality "British" ;
+    bs:portrayedBy bs:Timothy_Carlton ;
+    bs:Relationship [ bs:relationshipCharacter bs:Mrs_Holmes ; bs:relationshipType bs:partner ] ;
+    bs:Relationship [ bs:relationshipCharacter bs:Sherlock_Holmes ; bs:relationshipType bs:child ] ;
+    bs:Relationship [ bs:relationshipCharacter bs:Mycroft_Holmes ; bs:relationshipType bs:child ] ;
+    bs:Relationship [ bs:relationshipCharacter bs:Eurus_Holmes ; bs:relationshipType bs:child ] .
+
+bs:Timothy_Carlton
+    a bs:Actor ;
+    rdfs:label "Timothy Carlton" ;
+    bs:gender bs:male ;
+    bs:portrays bs:Mr_Holmes .
+
+bs:Mrs_Holmes
+    a bs:Character ;
+    rdfs:label "Mrs Holmes" ;
+    bs:gender bs:female ;
+    bs:nationality "British" ;
+    bs:portrayedBy bs:Wanda_Ventham ;
+    bs:Relationship [ bs:relationshipCharacter bs:Mr_Holmes ; bs:relationshipType bs:partner ] ;
+    bs:Relationship [ bs:relationshipCharacter bs:Sherlock_Holmes ; bs:relationshipType bs:child ] ;
+    bs:Relationship [ bs:relationshipCharacter bs:Mycroft_Holmes ; bs:relationshipType bs:child ] ;
+    bs:Relationship [ bs:relationshipCharacter bs:Eurus_Holmes ; bs:relationshipType bs:child ] .
+
+bs:Wanda_Ventham
+    a bs:Actor ;
+    rdfs:label "Wanda Ventham" ;
+    bs:gender bs:female ;
+    bs:portrays bs:Mrs_Holmes .
+
+bs:John_Watson
+    a bs:Character ;
+    #uri <https://bakerstreet.fandom.com/wiki/John_Watson_(Freeman)> ;
+    rdfs:label "John Watson" ;
+    bs:gender bs:male ;
+    bs:nationality "British" ;
+    bs:affiliation "Royal Army Medical Corps", "Fifth Northumberland Fusiliers", "Scotland Yard" ;
+    bs:occupation "Army doctor", "General Practicioner", "Physician" ;
+    bs:portrayedBy bs:Martin_Freeman ;
+    bs:Relationship [ bs:relationshipCharacter bs:Sherlock_Holmes ; bs:relationshipType bs:friend ] ;
+    bs:Relationship [ bs:relationshipCharacter bs:Jim_Moriarty ; bs:relationshipType bs:enemy ] ;
+    bs:Relationship [ bs:relationshipCharacter bs:Harriet_Watson ; bs:relationshipType bs:sibling ] .
+
+bs:Martin_Freeman
+    a bs:Actor ;
+    rdfs:label "Martin Freeman" ;
+    bs:gender bs:male ;
+    bs:portrays bs:John_Watson .
+
+bs:Harriet_Watson
+    a bs:Character ;
+    #uri <https://bakerstreet.fandom.com/wiki/Minor_Sherlock_characters#Harriet_Watson> ;
+    rdfs:label "Harriet Watson" ;
+    bs:gender bs:female ;
+    bs:nationality "British" ;
+    bs:Relationship [ bs:relationshipCharacter bs:John_Watson ; bs:relationshipType bs:sibling ] .
+
+bs:Mycroft_Holmes
+    a bs:Character ;
+    #uri <https://bakerstreet.fandom.com/wiki/Mycroft_Holmes_(Gatiss)> ;
+    rdfs:label "Mycroft Holmes" ;
+    bs:gender bs:male ;
+    bs:nationality "British" ;
+    bs:affiliation "British Government" ;
+    bs:occupation "Government official" ;
+    bs:portrayedBy bs:Mark_Gatiss, bs:Aaron_Richards ;
+    bs:Relationship [ bs:relationshipCharacter bs:Mr_Holmes ; bs:relationshipType bs:parent ] ;
+    bs:Relationship [ bs:relationshipCharacter bs:Mrs_Holmes ; bs:relationshipType bs:parent ] ;
+    bs:Relationship [ bs:relationshipCharacter bs:Sherlock_Holmes ; bs:relationshipType bs:sibling ] ;
+    bs:Relationship [ bs:relationshipCharacter bs:Eurus_Holmes ; bs:relationshipType bs:sibling, bs:enemy ] .
+
+bs:Mark_Gatiss
+    a bs:Actor ;
+    rdfs:label "Mark Gatiss" ;
+    bs:gender bs:male ;
+    bs:portrays bs:Mycroft_Holmes .
+
+bs:Eurus_Holmes
+    a bs:Character ;
+    rdfs:label "Eurus Holmes" ;
+    bs:gender bs:female ;
+    bs:nationality "British" ;
+    bs:affiliation "Sherrinford" ;
+    bs:occupation "patient", "prisoner" ;
+    bs:portrayedBy bs:Siân_Brooke, wp:Indica_Watson ;
+    bs:Relationship [ bs:relationshipCharacter bs:Mr_Holmes ; bs:relationshipType bs:parent ] ;
+    bs:Relationship [ bs:relationshipCharacter bs:Mrs_Holmes ; bs:relationshipType bs:parent ] ;
+    bs:Relationship [ bs:relationshipCharacter bs:Sherlock_Holmes ; bs:relationshipType bs:sibling, bs:enemy ] ;
+    bs:Relationship [ bs:relationshipCharacter bs:Mycroft_Holmes ; bs:relationshipType bs:sibling, bs:enemy ] ;
+    bs:Relationship [ bs:relationshipCharacter bs:Jim_Moriarty ; bs:relationshipType bs:friend ] .
+
+bs:Siân_Brooke
+    a bs:Actor ;
+    rdfs:label "Siân Brooke" ;
+    bs:gender bs:female ;
+    bs:portrays bs:Eurus_Holmes .
+
+bs:Jim_Moriarty
+    a bs:Character ;
+    rdfs:label "Jim Moriarty" ;
+    bs:gender bs:male ;
+    bs:portrayedBy bs:Andrew_Scott ;
+    bs:Relationship [ bs:relationshipCharacter bs:Sherlock_Holmes ; bs:relationshipType bs:enemy ] ;
+    bs:Relationship [ bs:relationshipCharacter bs:John_Watson ; bs:relationshipType bs:enemy ] ;
+    bs:Relationship [ bs:relationshipCharacter bs:Eurus_Holmes ; bs:relationshipType bs:friend ] .
+
+bs:Andrew_Scott
+    a bs:Actor ;
+    rdfs:label "Andrew Scott" ;
+    bs:gender bs:male ;
+    bs:portrays bs:Jim_Moriarty .
