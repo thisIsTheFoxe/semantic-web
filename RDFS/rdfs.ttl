@@ -82,8 +82,8 @@ bs:Sherlock_Holmes
     foaf:gender "male" ;
     bs:nationality "British" ;
     bs:affiliation "New Scotland Yard" ;
-    bs:occupation ("Chemist" "Consulting Detective") ;
-    bs:portrayedBy (bs:Benedict_Cumberbatch bs:Louis_Moffat bs:Tom_Stoughton) ;
+    bs:occupation "Chemist", "Consulting Detective" ;
+    bs:portrayedBy bs:Benedict_Cumberbatch, bs:Louis_Moffat, bs:Tom_Stoughton ;
     bs:relationship [ bs:Character bs:Mr_Holmes ; bs:relationshipType "parent" ] ;
     bs:relationship [ bs:Character bs:Mrs_Holmes ; bs:relationshipType "parent" ] ;
     bs:relationship [ bs:Character bs:Mycroft_Holmes ; bs:relationshipType "sibling" ] ;
@@ -155,6 +155,8 @@ bs:John_Watson
     foaf:nick "Sherlock" ;
     foaf:gender "male" ;
     bs:nationality "British" ;
+    bs:affiliation "Royal Army Medical Corps", "Fifth Northumberland Fusiliers", "Scotland Yard" ;
+    bs:occupation "Army doctor", "General Practicioner", "Physician" ;
     bs:portrayedBy bs:Martin_Freeman ;
     bs:relationship [ bs:Character bs:Sherlock_Holmes ; bs:relationshipType "friend" ] ;
     bs:relationship [ bs:Character bs:Jim_Moriarty ; bs:relationshipType "enemy" ] ;
@@ -217,9 +219,7 @@ bs:Eurus_Holmes
     foaf:gender "female" ;
     bs:nationality "British" ;
     bs:affiliation "Sherrinford" ;
-    bs:occupation ("patient" "prisoner") ;
-    bs:parents (bs:Mr_Holmes bs:Mrs_Holmes) ;
-    bs:siblings (bs:Sherlock_Holmes bs:Mycroft_Holmes) ;
+    bs:occupation "patient", "prisoner" ;
     bs:portrayedBy (bs:Siân_Brooke bs:Indica_Watson) ;
     bs:relationship [ bs:Character bs:Mr_Holmes ; bs:relationshipType "parent" ] ;
     bs:relationship [ bs:Character bs:Mrs_Holmes ; bs:relationshipType "parent" ] ;
