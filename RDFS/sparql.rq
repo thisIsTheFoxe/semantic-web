@@ -1,0 +1,54 @@
+# Query 1: get the names of the siblings of Sherlock Holmes
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX bs: <http://www.example.org/bakerstreet>
+
+SELECT ?name
+WHERE {
+  ?x foaf:name ?name .
+  ?x bs:relationship [ bs:Character bs:Sherlock_Holmes ; bs:relationshipType "sibling" ] .
+}
+
+# Query 2: get the amount of Sherlock Holmes' enemies
+PREFIX bs: <http://www.example.org/bakerstreet>
+
+SELECT (COUNT(?x) as ?count)
+WHERE {
+  ?x bs:relationship [ bs:Character bs:Sherlock_Holmes ; bs:relationshipType "enemy" ] .
+}
+
+# Query 3: get mapping of actor name to character name
+PREFIX bs: <http://www.example.org/bakerstreet>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT DISTINCT ?actor ?character
+WHERE {
+  ?a rdfs:label ?actor .
+  ?a a bs:Actor .
+  {
+    ?a bs:portrays/foaf:name ?character .
+  } UNION
+  {
+    ?a bs:portrays/rdfs:label ?character .
+    FILTER(NOT EXISTS { ?a bs:portrays/foaf:name ?z . })
+  }
+}
+
+# Query 4: get the names and relationship for each person of the Holmes family
+PREFIX bs: <http://www.example.org/bakerstreet>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT DISTINCT ?name ?relationship
+WHERE {
+  ?x rdfs:label "Sherlock Holmes" .
+  ?x bs:relationship [ bs:Character ?character ; bs:relationshipType ?relationship ] .
+  {
+    ?character foaf:name ?name .
+  } UNION
+  {
+    ?character rdfs:label ?name .
+    FILTER(NOT EXISTS { ?character foaf:name ?z . })
+  }
+  FILTER( ?relationship = "sibling" || ?relationship = "parent" )
+}

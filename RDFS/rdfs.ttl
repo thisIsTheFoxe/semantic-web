@@ -175,6 +175,7 @@ bs:Martin_Freeman
 bs:Harriet_Watson
     a bs:Character ;
     foaf:page <https://bakerstreet.fandom.com/wiki/Minor_Sherlock_characters#Harriet_Watson> ;
+    foaf:name "Harriet Watson" ;
     foaf:givenName "Harriet" ;
     foaf:familyName "Watson" ;
     foaf:nick "Harry" ;
@@ -193,7 +194,7 @@ bs:Mycroft_Holmes
     bs:nationality "British" ;
     bs:affiliation "British Government" ;
     bs:occupation "Government official" ;
-    bs:portrayedBy (bs:Mark_Gatiss bs:Aaron_Richards) ;
+    bs:portrayedBy bs:Mark_Gatiss, bs:Aaron_Richards ;
     bs:relationship [ bs:Character bs:Mr_Holmes ; bs:relationshipType "parent" ] ;
     bs:relationship [ bs:Character bs:Mrs_Holmes ; bs:relationshipType "parent" ] ;
     bs:relationship [ bs:Character bs:Sherlock_Holmes ; bs:relationshipType "sibling" ] ;
@@ -220,7 +221,7 @@ bs:Eurus_Holmes
     bs:nationality "British" ;
     bs:affiliation "Sherrinford" ;
     bs:occupation "patient", "prisoner" ;
-    bs:portrayedBy (bs:Siân_Brooke bs:Indica_Watson) ;
+    bs:portrayedBy bs:Siân_Brooke, bs:Indica_Watson ;
     bs:relationship [ bs:Character bs:Mr_Holmes ; bs:relationshipType "parent" ] ;
     bs:relationship [ bs:Character bs:Mrs_Holmes ; bs:relationshipType "parent" ] ;
     bs:relationship [ bs:Character bs:Sherlock_Holmes ; bs:relationshipType "sibling", "enemy" ] ;
@@ -240,6 +241,7 @@ bs:Jim_Moriarty
     a bs:Character ;
     foaf:page <https://bakerstreet.fandom.com/wiki/Jim_Moriarty> ;
     rdfs:label "Jim Moriarty" ;
+    foaf:name "Jim Moriarty" ;
     foaf:givenName "James" ;
     foaf:familyName "Moriarty" ;
     foaf:nick "Jim" ;

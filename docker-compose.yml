@@ -1,0 +1,10 @@
+version: '3.5'
+services:
+   fuseki:
+      container_name: fuseki
+      image: stain/jena-fuseki
+      environment:
+      - ADMIN_PASSWORD=admin
+      - FUSEKI_DATASET_1=sherlock
+      ports:
+      - 3030:3030
