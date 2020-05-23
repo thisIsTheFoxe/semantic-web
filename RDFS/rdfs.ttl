@@ -25,20 +25,6 @@ bs:occupation
     rdfs:label "Occupation" ;
     rdfs:comment "The occupation of a character." .
 
-# list of bs:Character with length 2
-bs:parents
-    a rdf:Property ;
-    rdfs:domain bs:Character;
-    rdfs:label "Parents" ;
-    rdfs:comment "Parents of a character." .
-
-# list of bs:Character with min length 1
-bs:siblings
-    a rdf:Property ;
-    rdfs:domain bs:Character;
-    rdfs:label "Siblings" ;
-    rdfs:comment "Siblings of a character." .
-
 # list of bs:Actor with min length 1
 bs:portrayedBy
     a rdf:Property ;
@@ -65,6 +51,20 @@ bs:Actor
     rdfs:label "Actor" ;
     rdfs:comment "Defines a person as an actor of a character." .
 
+bs:relationship
+    a rdf:Property ;
+    rdfs:domain bs:Character ;
+    rdfs:subClassOf foaf:knows ;
+    rdfs:label "Relationship" ;
+    rdfs:comment "Describes the relationship between two characters." .
+
+# list of strings with min length 1
+bs:relationshipType
+    a rdf:Property ;
+    rdfs:domain bs:relationship ;
+    rdfs:label "Relationship type" ;
+    rdfs:comment "Describes the type of relationship." .
+
 bs:Sherlock_Holmes
     a bs:Character ;
     foaf:page <https://bakerstreet.fandom.com/wiki/William_Sherlock_Scott_Holmes> ;
@@ -77,9 +77,13 @@ bs:Sherlock_Holmes
     bs:nationality "British" ;
     bs:affiliation "New Scotland Yard" ;
     bs:occupation ("Chemist" "Consulting Detective") ;
-    bs:parents (bs:Mr_Holmes bs:Mrs_Holmes) ;
-    bs:siblings (bs:Mycroft_Holmes bs:Eurus_Holmes) ;
-    bs:portrayedBy (bs:Benedict_Cumberbatch bs:Louis_Moffat bs:Tom_Stoughton) .
+    bs:portrayedBy (bs:Benedict_Cumberbatch bs:Louis_Moffat bs:Tom_Stoughton) ;
+    bs:relationship [ bs:Character bs:Mr_Holmes ; bs:relationshipType "parent" ] ;
+    bs:relationship [ bs:Character bs:Mrs_Holmes ; bs:relationshipType "parent" ] ;
+    bs:relationship [ bs:Character bs:Mycroft_Holmes ; bs:relationshipType "sibling" ] ;
+    bs:relationship [ bs:Character bs:Eurus_Holmes ; bs:relationshipType "sibling", "enemy" ] ;
+    bs:relationship [ bs:Character bs:John_Watson ; bs:relationshipType "friend" ] ;
+    bs:relationship [ bs:Character bs:Jim_Moriarty ; bs:relationshipType "enemy" ] .
 
 bs:Benedict_Cumberbatch
     a bs:Actor ;
@@ -98,7 +102,11 @@ bs:Mr_Holmes
     foaf:familyName "Holmes" ;
     foaf:gender "male" ;
     bs:nationality "British" ;
-    bs:portrayedBy bs:Timothy_Carlton .
+    bs:portrayedBy bs:Timothy_Carlton ;
+    bs:relationship [ bs:Character bs:Mrs_Holmes ; bs:relationshipType "partner" ] ;
+    bs:relationship [ bs:Character bs:Sherlock_Holmes ; bs:relationshipType "child" ] ;
+    bs:relationship [ bs:Character bs:Mycroft_Holmes ; bs:relationshipType "child" ] ;
+    bs:relationship [ bs:Character bs:Eurus_Holmes ; bs:relationshipType "child" ] .
 
 bs:Timothy_Carlton
     a bs:Actor ;
@@ -116,7 +124,11 @@ bs:Mrs_Holmes
     foaf:familyName "Holmes" ;
     foaf:gender "female" ;
     bs:nationality "British" ;
-    bs:portrayedBy bs:Wanda_Ventham .
+    bs:portrayedBy bs:Wanda_Ventham ;
+    bs:relationship [ bs:Character bs:Mr_Holmes ; bs:relationshipType "partner" ] ;
+    bs:relationship [ bs:Character bs:Sherlock_Holmes ; bs:relationshipType "child" ] ;
+    bs:relationship [ bs:Character bs:Mycroft_Holmes ; bs:relationshipType "child" ] ;
+    bs:relationship [ bs:Character bs:Eurus_Holmes ; bs:relationshipType "child" ] .
 
 bs:Wanda_Ventham
     a bs:Actor ;
@@ -137,7 +149,10 @@ bs:John_Watson
     foaf:nick "Sherlock" ;
     foaf:gender "male" ;
     bs:nationality "British" ;
-    bs:portrayedBy bs:Martin_Freeman .
+    bs:portrayedBy bs:Martin_Freeman ;
+    bs:relationship [ bs:Character bs:Sherlock_Holmes ; bs:relationshipType "friend" ] ;
+    bs:relationship [ bs:Character bs:Jim_Moriarty ; bs:relationshipType "enemy" ] ;
+    bs:relationship [ bs:Character bs:Harriet_Watson ; bs:relationshipType "sibling" ] .
 
 bs:Martin_Freeman
     a bs:Actor ;
@@ -148,6 +163,16 @@ bs:Martin_Freeman
     foaf:gender "male" ;
     foaf:birthday "09-08" ;
     bs:portrays bs:John_Watson .
+
+bs:Harriet_Watson
+    a bs:Character ;
+    foaf:page <https://bakerstreet.fandom.com/wiki/Minor_Sherlock_characters#Harriet_Watson> ;
+    foaf:givenName "Harriet" ;
+    foaf:familyName "Watson" ;
+    foaf:nick "Harry" ;
+    foaf:gender "female" ;
+    bs:nationality "British" ;
+    bs:relationship [ bs:Character bs:John_Watson ; bs:relationshipType "sibling" ] .
 
 bs:Mycroft_Holmes
     a bs:Character ;
@@ -160,9 +185,11 @@ bs:Mycroft_Holmes
     bs:nationality "British" ;
     bs:affiliation "British Government" ;
     bs:occupation "Government official" ;
-    bs:parents (bs:Mr_Holmes bs:Mrs_Holmes) ;
-    bs:siblings (bs:Sherlock_Holmes bs:Eurus_Holmes) ;
-    bs:portrayedBy (bs:Mark_Gatiss bs:Aaron_Richards) .
+    bs:portrayedBy (bs:Mark_Gatiss bs:Aaron_Richards) ;
+    bs:relationship [ bs:Character bs:Mr_Holmes ; bs:relationshipType "parent" ] ;
+    bs:relationship [ bs:Character bs:Mrs_Holmes ; bs:relationshipType "parent" ] ;
+    bs:relationship [ bs:Character bs:Sherlock_Holmes ; bs:relationshipType "sibling" ] ;
+    bs:relationship [ bs:Character bs:Eurus_Holmes ; bs:relationshipType "sibling", "enemy" ] .
 
 bs:Mark_Gatiss
     a bs:Actor ;
@@ -187,7 +214,12 @@ bs:Eurus_Holmes
     bs:occupation ("patient" "prisoner") ;
     bs:parents (bs:Mr_Holmes bs:Mrs_Holmes) ;
     bs:siblings (bs:Sherlock_Holmes bs:Mycroft_Holmes) ;
-    bs:portrayedBy (bs:Siân_Brooke bs:Indica_Watson) .
+    bs:portrayedBy (bs:Siân_Brooke bs:Indica_Watson) ;
+    bs:relationship [ bs:Character bs:Mr_Holmes ; bs:relationshipType "parent" ] ;
+    bs:relationship [ bs:Character bs:Mrs_Holmes ; bs:relationshipType "parent" ] ;
+    bs:relationship [ bs:Character bs:Sherlock_Holmes ; bs:relationshipType "sibling", "enemy" ] ;
+    bs:relationship [ bs:Character bs:Mycroft_Holmes ; bs:relationshipType "sibling", "enemy" ] ;
+    bs:relationship [ bs:Character bs:Jim_Moriarty ; bs:relationshipType "friend" ] .
 
 bs:Siân_Brooke
     a bs:Actor ;
@@ -197,3 +229,26 @@ bs:Siân_Brooke
     foaf:familyName "Brooke" ;
     foaf:gender "female" ;
     bs:portrays bs:Eurus_Holmes .
+
+bs:Jim_Moriarty
+    a bs:Character ;
+    foaf:page <https://bakerstreet.fandom.com/wiki/Jim_Moriarty> ;
+    rdfs:label "Jim Moriarty" ;
+    foaf:givenName "James" ;
+    foaf:familyName "Moriarty" ;
+    foaf:nick "Jim" ;
+    foaf:gender "male" ;
+    bs:portrayedBy bs:Andrew_Scott ;
+    bs:relationship [ bs:Character bs:Sherlock_Holmes ; bs:relationshipType "enemy" ] ;
+    bs:relationship [ bs:Character bs:John_Watson ; bs:relationshipType "enemy" ] ;
+    bs:relationship [ bs:Character bs:Eurus_Holmes ; bs:relationshipType "friend" ] .
+
+bs:Andrew_Scott
+    a bs:Actor ;
+    foaf:page <https://bakerstreet.fandom.com/wiki/Andrew_Scott> ;
+    rdfs:label "Andrew Scott" ;
+    foaf:givenName "Andrew" ;
+    foaf:familyName "Scott" ;
+    foaf:gender "male" ;
+    foaf:birthday "10-21" ;
+    bs:portrays bs:Jim_Moriarty .
