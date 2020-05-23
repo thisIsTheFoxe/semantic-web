@@ -46,6 +46,13 @@ bs:portrayedBy
     rdfs:label "Portrayed by" ;
     rdfs:comment "List of actors playing a character." .
 
+# list of bs:Character with min length 1
+bs:portrays
+    a rdf:Property ;
+    rdfs:domain bs:Actor ;
+    rdfs:label "Portrays" ;
+    rdfs:comment "List of characters this actor plays." .
+
 bs:Character
     a rdf:Class ;
     rdfs:subClassOf foaf:Person ;
@@ -72,8 +79,7 @@ bs:Sherlock_Holmes
     bs:occupation ("Chemist" "Consulting Detective") ;
     bs:parents (bs:Mr_Holmes bs:Mrs_Holmes) ;
     bs:siblings (bs:Mycroft_Holmes bs:Eurus_Holmes) ;
-    bs:portrayedBy (bs:Benedict_Cumberbatch bs:Louis_Moffat bs:Tom_Stoughton) ;
-    foaf:knows (bs:John_Watson bs:Jim_Moriarty) .
+    bs:portrayedBy (bs:Benedict_Cumberbatch bs:Louis_Moffat bs:Tom_Stoughton) .
 
 bs:Benedict_Cumberbatch
     a bs:Actor ;
@@ -81,7 +87,9 @@ bs:Benedict_Cumberbatch
     rdfs:label "Benedict Cumberbatch" ;
     foaf:givenName "Benedict Timothy Carlton" ;
     foaf:familyName "Cumberbatch" ;
-    foaf:birthday "07-19" .
+    foaf:gender "male" ;
+    foaf:birthday "07-19" ;
+    bs:portrays bs:Sherlock_Holmes .
 
 bs:Mr_Holmes
     a bs:Character ;
@@ -90,7 +98,6 @@ bs:Mr_Holmes
     foaf:familyName "Holmes" ;
     foaf:gender "male" ;
     bs:nationality "British" ;
-    foaf:knows (bs:Sherlock_Holmes bs:Mrs_Holmes bs:Mycroft_Holmes bs:Eurus_Holmes) ;
     bs:portrayedBy bs:Timothy_Carlton .
 
 bs:Timothy_Carlton
@@ -98,7 +105,9 @@ bs:Timothy_Carlton
     foaf:page <https://bakerstreet.fandom.com/wiki/Timothy_Carlton> ;
     rdfs:label "Timothy Carlton" ;
     foaf:givenName "Timothy" ;
-    foaf:familyName "Carlton" .
+    foaf:familyName "Carlton" ;
+    foaf:gender "male" ;
+    bs:portrays bs:Mr_Holmes .
 
 bs:Mrs_Holmes
     a bs:Character ;
@@ -107,7 +116,6 @@ bs:Mrs_Holmes
     foaf:familyName "Holmes" ;
     foaf:gender "female" ;
     bs:nationality "British" ;
-    foaf:knows (bs:Sherlock_Holmes bs:Mr_Holmes bs:Mycroft_Holmes bs:Eurus_Holmes) ;
     bs:portrayedBy bs:Wanda_Ventham .
 
 bs:Wanda_Ventham
@@ -115,7 +123,9 @@ bs:Wanda_Ventham
     foaf:page <https://bakerstreet.fandom.com/wiki/Wanda_Ventham> ;
     rdfs:label "Wanda Ventham" ;
     foaf:givenName "Wanda" ;
-    foaf:familyName "Ventham" .
+    foaf:familyName "Ventham" ;
+    foaf:gender "female" ;
+    bs:portrays bs:Mrs_Holmes .
 
 bs:John_Watson
     a bs:Character ;
@@ -127,11 +137,7 @@ bs:John_Watson
     foaf:nick "Sherlock" ;
     foaf:gender "male" ;
     bs:nationality "British" ;
-    bs:affiliation ("Royal Army Medical Corps" "Fifth Northumberland Fusiliers" "Scotland Yard") ;
-    bs:occupation ("Army doctor" "General Practitioner" "Physician") ;
-    bs:siblings bs:Harriet_Watson ;
-    bs:portrayedBy bs:Martin_Freeman ;
-    foaf:knows (bs:Sherlock_Holmes bs:Mary_Morstan bs:Rosamund_Mary_Watson bs:Jim_Moriarty) .
+    bs:portrayedBy bs:Martin_Freeman .
 
 bs:Martin_Freeman
     a bs:Actor ;
@@ -139,4 +145,55 @@ bs:Martin_Freeman
     rdfs:label "Martin Freeman" ;
     foaf:givenName "Martin John Christopher" ;
     foaf:familyName "Freeman" ;
-    foaf:birthday "09-08" .
+    foaf:gender "male" ;
+    foaf:birthday "09-08" ;
+    bs:portrays bs:John_Watson .
+
+bs:Mycroft_Holmes
+    a bs:Character ;
+    foaf:page <https://bakerstreet.fandom.com/wiki/Mycroft_Holmes_(Gatiss)> ;
+    rdfs:label "Mycroft Holmes (Gatiss)" ;
+    foaf:givenName "Mycroft" ;
+    foaf:familyName "Holmes" ;
+    foaf:name "Mycroft Holmes" ;
+    foaf:gender "male" ;
+    bs:nationality "British" ;
+    bs:affiliation "British Government" ;
+    bs:occupation "Government official" ;
+    bs:parents (bs:Mr_Holmes bs:Mrs_Holmes) ;
+    bs:siblings (bs:Sherlock_Holmes bs:Eurus_Holmes) ;
+    bs:portrayedBy (bs:Mark_Gatiss bs:Aaron_Richards) .
+
+bs:Mark_Gatiss
+    a bs:Actor ;
+    foaf:page <https://bakerstreet.fandom.com/wiki/Mark_Gatiss> ;
+    rdfs:label "Mark Gatiss" ;
+    foaf:givenName "Mark" ;
+    foaf:familyName "Gatiss" ;
+    foaf:gender "male" ;
+    foaf:birthday "10-17" ;
+    bs:portrays bs:Mycroft_Holmes .
+
+bs:Eurus_Holmes
+    a bs:Character ;
+    foaf:page <https://bakerstreet.fandom.com/wiki/Eurus_Holmes> ;
+    rdfs:label "Eurus Holmes" ;
+    foaf:givenName "Eurus" ;
+    foaf:familyName "Holmes" ;
+    foaf:name "Eurus Holmes" ;
+    foaf:gender "female" ;
+    bs:nationality "British" ;
+    bs:affiliation "Sherrinford" ;
+    bs:occupation ("patient" "prisoner") ;
+    bs:parents (bs:Mr_Holmes bs:Mrs_Holmes) ;
+    bs:siblings (bs:Sherlock_Holmes bs:Mycroft_Holmes) ;
+    bs:portrayedBy (bs:Siân_Brooke bs:Indica_Watson) .
+
+bs:Siân_Brooke
+    a bs:Actor ;
+    foaf:page <https://bakerstreet.fandom.com/wiki/Si%C3%A2n_Brooke> ;
+    rdfs:label "Siân Brooke" ;
+    foaf:givenName "Siân Elizabeth" ;
+    foaf:familyName "Brooke" ;
+    foaf:gender "female" ;
+    bs:portrays bs:Eurus_Holmes .
