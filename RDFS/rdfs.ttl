@@ -2,12 +2,13 @@
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix bs: <http://www.example.org/bakerstreet> .
 
-# string
 bs:nationality
     a rdf:Property ;
     rdfs:domain bs:Character;
+    rdfs:range xsd:string ;
     rdfs:label "Nationality" ;
     rdfs:comment "The nationality of a character." .
 
@@ -15,6 +16,7 @@ bs:nationality
 bs:affiliation
     a rdf:Property ;
     rdfs:domain bs:Character;
+    rdfs:range rdf:Bag ;
     rdfs:label "Affiliation" ;
     rdfs:comment "The affiliation of a character." .
 
@@ -22,6 +24,7 @@ bs:affiliation
 bs:occupation
     a rdf:Property ;
     rdfs:domain bs:Character;
+    rdfs:range rdf:Bag ;
     rdfs:label "Occupation" ;
     rdfs:comment "The occupation of a character." .
 
@@ -29,6 +32,7 @@ bs:occupation
 bs:portrayedBy
     a rdf:Property ;
     rdfs:domain bs:Character ;
+    rdfs:range rdf:Bag ;
     rdfs:label "Portrayed by" ;
     rdfs:comment "List of actors playing a character." .
 
@@ -36,6 +40,7 @@ bs:portrayedBy
 bs:portrays
     a rdf:Property ;
     rdfs:domain bs:Actor ;
+    rdfs:range rdf:Bag ;
     rdfs:label "Portrays" ;
     rdfs:comment "List of characters this actor plays." .
 
@@ -62,6 +67,7 @@ bs:relationship
 bs:relationshipType
     a rdf:Property ;
     rdfs:domain bs:relationship ;
+    rdfs:range rdf:Bag ;
     rdfs:label "Relationship type" ;
     rdfs:comment "Describes the type of relationship." .
 
