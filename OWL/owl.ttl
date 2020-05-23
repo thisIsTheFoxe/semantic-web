@@ -1,0 +1,692 @@
+@prefix bs: <https://bakerstreet.fandom.com/wiki/> .
+@prefix wp: <https://en.wikipedia.org/wiki/> .
+@prefix ebw: <https://en.everybodywiki.com/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://www.w3.org/2002/07/owl#> .
+
+[ rdf:type owl:Ontology
+ ] .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  https://bakerstreet.fandom.com/wiki/Relationship
+bs:Relationship rdf:type owl:ObjectProperty ,
+                         owl:AsymmetricProperty ,
+                         owl:IrreflexiveProperty ;
+                rdfs:domain bs:Character .
+
+
+###  https://bakerstreet.fandom.com/wiki/affiliation
+bs:affiliation rdf:type owl:ObjectProperty ;
+               rdfs:domain bs:Character .
+
+
+###  https://bakerstreet.fandom.com/wiki/gender
+bs:gender rdf:type owl:ObjectProperty ;
+          rdfs:domain bs:Person ;
+          rdfs:range [ rdf:type owl:Class ;
+                       owl:unionOf ( bs:female
+                                     bs:male
+                                   )
+                     ] .
+
+
+###  https://bakerstreet.fandom.com/wiki/occupation
+bs:occupation rdf:type owl:ObjectProperty ;
+              rdfs:domain bs:Character .
+
+
+###  https://bakerstreet.fandom.com/wiki/portrayedBy
+bs:portrayedBy rdf:type owl:ObjectProperty ,
+                        owl:AsymmetricProperty ,
+                        owl:IrreflexiveProperty ;
+               rdfs:domain bs:Character .
+
+
+###  https://bakerstreet.fandom.com/wiki/portrays
+bs:portrays rdf:type owl:ObjectProperty ,
+                     owl:AsymmetricProperty ,
+                     owl:IrreflexiveProperty ;
+            rdfs:domain bs:Actor .
+
+
+###  https://bakerstreet.fandom.com/wiki/relationshipCharacter
+bs:relationshipCharacter rdf:type owl:ObjectProperty ;
+                         rdfs:domain bs:Relationship ;
+                         rdfs:range bs:Character ;
+                         rdfs:comment "Relation to the character." ;
+                         rdfs:label "Relationship character" .
+
+
+###  https://bakerstreet.fandom.com/wiki/relationshipType
+bs:relationshipType rdf:type owl:ObjectProperty ;
+                    rdfs:domain bs:Relationship ;
+                    rdfs:range [ rdf:type owl:Class ;
+                                 owl:unionOf ( bs:child
+                                               bs:enemy
+                                               bs:friend
+                                               bs:parent
+                                               bs:partner
+                                               bs:sibling
+                                             )
+                               ] .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  https://bakerstreet.fandom.com/wiki/child
+bs:child rdf:type owl:DatatypeProperty ;
+         rdfs:domain bs:relationshipType .
+
+
+###  https://bakerstreet.fandom.com/wiki/enemy
+bs:enemy rdf:type owl:DatatypeProperty ;
+         rdfs:domain bs:relationshipType .
+
+
+###  https://bakerstreet.fandom.com/wiki/female
+bs:female rdf:type owl:DatatypeProperty ;
+          rdfs:domain bs:gender .
+
+
+###  https://bakerstreet.fandom.com/wiki/friend
+bs:friend rdf:type owl:DatatypeProperty ;
+          rdfs:domain bs:relationshipType .
+
+
+###  https://bakerstreet.fandom.com/wiki/male
+bs:male rdf:type owl:DatatypeProperty ;
+        rdfs:domain bs:gender .
+
+
+###  https://bakerstreet.fandom.com/wiki/nationality
+bs:nationality rdf:type owl:DatatypeProperty ;
+               rdfs:domain bs:Character ;
+               rdfs:range xsd:string ;
+               rdfs:comment "The nationality of a character." ;
+               rdfs:label "Nationality" .
+
+
+###  https://bakerstreet.fandom.com/wiki/parent
+bs:parent rdf:type owl:DatatypeProperty ;
+          rdfs:domain bs:relationshipType .
+
+
+###  https://bakerstreet.fandom.com/wiki/partner
+bs:partner rdf:type owl:DatatypeProperty ;
+           rdfs:domain bs:relationshipType .
+
+
+###  https://bakerstreet.fandom.com/wiki/sibling
+bs:sibling rdf:type owl:DatatypeProperty ;
+           rdfs:domain bs:relationshipType .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  https://bakerstreet.fandom.com/wiki/Actor
+bs:Actor rdf:type owl:Class ;
+         rdfs:subClassOf [ rdf:type owl:Class ;
+                           owl:complementOf bs:Character
+                         ] .
+
+
+###  https://bakerstreet.fandom.com/wiki/Character
+bs:Character rdf:type owl:Class ;
+             rdfs:subClassOf [ rdf:type owl:Class ;
+                               owl:complementOf bs:Actor
+                             ] .
+
+
+###  https://bakerstreet.fandom.com/wiki/Person
+bs:Person rdf:type owl:Class ;
+          rdfs:label "Person" .
+
+
+###  https://bakerstreet.fandom.com/wiki/Relationship
+bs:Relationship rdf:type owl:Class .
+
+
+###  https://bakerstreet.fandom.com/wiki/child
+bs:child rdf:type owl:Class ;
+         owl:equivalentClass [ rdf:type owl:Class ;
+                               owl:complementOf bs:parent
+                             ] .
+
+
+###  https://bakerstreet.fandom.com/wiki/enemy
+bs:enemy rdf:type owl:Class ;
+         owl:equivalentClass [ rdf:type owl:Class ;
+                               owl:complementOf bs:friend
+                             ] .
+
+
+###  https://bakerstreet.fandom.com/wiki/female
+bs:female rdf:type owl:Class ;
+          owl:equivalentClass [ rdf:type owl:Class ;
+                                owl:complementOf bs:male
+                              ] .
+
+
+###  https://bakerstreet.fandom.com/wiki/friend
+bs:friend rdf:type owl:Class ;
+          owl:equivalentClass [ rdf:type owl:Class ;
+                                owl:complementOf bs:enemy
+                              ] .
+
+
+###  https://bakerstreet.fandom.com/wiki/gender
+bs:gender rdf:type owl:Class .
+
+
+###  https://bakerstreet.fandom.com/wiki/male
+bs:male rdf:type owl:Class ;
+        owl:equivalentClass [ rdf:type owl:Class ;
+                              owl:complementOf bs:female
+                            ] .
+
+
+###  https://bakerstreet.fandom.com/wiki/parent
+bs:parent rdf:type owl:Class ;
+          owl:equivalentClass [ rdf:type owl:Class ;
+                                owl:complementOf bs:child
+                              ] .
+
+
+###  https://bakerstreet.fandom.com/wiki/partner
+bs:partner rdf:type owl:Class .
+
+
+###  https://bakerstreet.fandom.com/wiki/portrayedBy
+bs:portrayedBy rdf:type owl:Class ;
+               owl:equivalentClass [ rdf:type owl:Class ;
+                                     owl:complementOf bs:portrays
+                                   ] .
+
+
+###  https://bakerstreet.fandom.com/wiki/portrays
+bs:portrays rdf:type owl:Class ;
+            owl:equivalentClass [ rdf:type owl:Class ;
+                                  owl:complementOf bs:portrayedBy
+                                ] .
+
+
+###  https://bakerstreet.fandom.com/wiki/relationshipType
+bs:relationshipType rdf:type owl:Class .
+
+
+###  https://bakerstreet.fandom.com/wiki/sibling
+bs:sibling rdf:type owl:Class .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  https://bakerstreet.fandom.com/wiki/Aaron_Richards
+bs:Aaron_Richards rdf:type owl:NamedIndividual .
+
+
+###  https://bakerstreet.fandom.com/wiki/Actor
+bs:Actor rdf:type owl:NamedIndividual ,
+                  bs:Person .
+
+
+###  https://bakerstreet.fandom.com/wiki/Andrew_Scott
+bs:Andrew_Scott rdf:type owl:NamedIndividual ,
+                         bs:Actor ;
+                bs:gender bs:male ;
+                bs:portrays bs:Jim_Moriarty ;
+                rdfs:label "Andrew Scott" .
+
+
+###  https://bakerstreet.fandom.com/wiki/Benedict_Cumberbatch
+bs:Benedict_Cumberbatch rdf:type owl:NamedIndividual ,
+                                 bs:Actor ;
+                        owl:sameAs wp:Benedict_Cumberbatch ;
+                        bs:gender bs:male ;
+                        bs:portrays bs:William_Sherlock_Scott_Holmes ;
+                        rdfs:label "Benedict Cumberbatch" .
+
+
+###  https://bakerstreet.fandom.com/wiki/Character
+bs:Character rdf:type owl:NamedIndividual ,
+                      bs:Person .
+
+
+###  https://bakerstreet.fandom.com/wiki/Eurus_Holmes
+bs:Eurus_Holmes rdf:type owl:NamedIndividual ,
+                         bs:Character ;
+                bs:Relationship _:genid22 ,
+                                _:genid23 ,
+                                _:genid24 ,
+                                _:genid25 ,
+                                _:genid26 ;
+                bs:gender bs:female ;
+                bs:portrayedBy bs:Siân_Brooke ,
+                               wp:Indica_Watson ;
+                bs:nationality "British" ;
+                rdfs:label "Eurus Holmes" ;
+                bs:affiliation "Sherrinford" ;
+                bs:occupation "patient" ,
+                              "prisoner" .
+
+_:genid22 bs:relationshipType bs:enemy ,
+                               bs:sibling .
+
+_:genid23 bs:relationshipType bs:enemy ,
+                               bs:sibling .
+
+_:genid24 bs:relationshipType bs:parent .
+
+_:genid25 bs:relationshipCharacter bs:Mrs_Holmes ;
+           bs:relationshipType bs:parent .
+
+_:genid26 bs:relationshipCharacter bs:Jim_Moriarty ;
+           bs:relationshipType bs:friend .
+
+
+###  https://bakerstreet.fandom.com/wiki/Jim_Moriarty
+bs:Jim_Moriarty rdf:type owl:NamedIndividual ,
+                         bs:Character ;
+                bs:Relationship _:genid27 ,
+                                _:genid28 ,
+                                _:genid29 ;
+                bs:gender bs:male ;
+                bs:portrayedBy bs:Andrew_Scott ;
+                rdfs:label "Jim Moriarty" .
+
+_:genid27 bs:relationshipType bs:enemy .
+
+_:genid28 bs:relationshipType bs:enemy .
+
+_:genid29 bs:relationshipCharacter bs:Eurus_Holmes ;
+           bs:relationshipType bs:friend .
+
+
+###  https://bakerstreet.fandom.com/wiki/Louis_Moffat
+bs:Louis_Moffat rdf:type owl:NamedIndividual ,
+                         bs:Actor ;
+                bs:gender bs:male ;
+                bs:portrays bs:William_Sherlock_Scott_Holmes ;
+                rdfs:label "Louis Moffat" .
+
+
+###  https://bakerstreet.fandom.com/wiki/Mark_Gatiss
+bs:Mark_Gatiss rdf:type owl:NamedIndividual ,
+                        bs:Actor ;
+               bs:gender bs:male ;
+               bs:portrays <https://bakerstreet.fandom.com/wiki/Mycroft_Holmes_(Gatiss)> ;
+               rdfs:label "Mark Gatiss" .
+
+
+###  https://bakerstreet.fandom.com/wiki/Martin_Freeman
+bs:Martin_Freeman rdf:type owl:NamedIndividual ,
+                           bs:Actor ;
+                  bs:gender bs:male ;
+                  bs:portrays <https://bakerstreet.fandom.com/wiki/John_Watson_(Freeman)> ;
+                  rdfs:label "Martin Freeman" .
+
+
+###  https://bakerstreet.fandom.com/wiki/Mrs_Holmes
+bs:Mrs_Holmes rdf:type owl:NamedIndividual ,
+                       bs:Character ;
+              bs:Relationship _:genid30 ,
+                              _:genid31 ,
+                              _:genid32 ,
+                              _:genid33 ;
+              bs:gender bs:female ;
+              bs:portrayedBy bs:Wanda_Ventham ;
+              bs:nationality "British" ;
+              rdfs:label "Mrs Holmes" .
+
+_:genid30 bs:relationshipCharacter bs:Eurus_Holmes ;
+           bs:relationshipType bs:child .
+
+_:genid31 bs:relationshipType bs:child .
+
+_:genid32 bs:relationshipType bs:child .
+
+_:genid33 bs:relationshipType bs:partner .
+
+
+###  https://bakerstreet.fandom.com/wiki/Siân_Brooke
+bs:Siân_Brooke rdf:type owl:NamedIndividual ,
+                        bs:Actor ;
+               bs:gender bs:female ;
+               bs:portrays bs:Eurus_Holmes ;
+               rdfs:label "Siân Brooke" .
+
+
+###  https://bakerstreet.fandom.com/wiki/Timothy_Carlton
+bs:Timothy_Carlton rdf:type owl:NamedIndividual ,
+                            bs:Actor ;
+                   bs:gender bs:male ;
+                   bs:portrays <https://bakerstreet.fandom.com/wiki/Mr_Holmes_(Carlton)> ;
+                   rdfs:label "Timothy Carlton" .
+
+
+###  https://bakerstreet.fandom.com/wiki/Wanda_Ventham
+bs:Wanda_Ventham rdf:type owl:NamedIndividual ,
+                          bs:Actor ;
+                 bs:gender bs:female ;
+                 bs:portrays bs:Mrs_Holmes ;
+                 rdfs:label "Wanda Ventham" .
+
+
+###  https://bakerstreet.fandom.com/wiki/William_Sherlock_Scott_Holmes
+bs:William_Sherlock_Scott_Holmes rdf:type owl:NamedIndividual ,
+                                          bs:Character ;
+                                 owl:sameAs wp:Sherlock_Holmes ;
+                                 bs:Relationship [ ] ,
+[ ] ,
+[ ] ,
+[ ] ,
+[ ] ,
+[ ] ;
+bs:gender bs:male ;
+bs:portrayedBy bs:Benedict_Cumberbatch ,
+               bs:Louis_Moffat ,
+               ebw:Tom_Stoughton ;
+bs:nationality "British" ;
+rdfs:label "Sherlock Holmes" ;
+bs:affiliation "New Scotland Yard" ;
+bs:occupation "Chemist" ,
+              "Consulting Detective" .
+
+
+###  https://bakerstreet.fandom.com/wiki/child
+bs:child rdf:type owl:NamedIndividual .
+
+
+###  https://bakerstreet.fandom.com/wiki/enemy
+bs:enemy rdf:type owl:NamedIndividual .
+
+
+###  https://bakerstreet.fandom.com/wiki/female
+bs:female rdf:type owl:NamedIndividual .
+
+
+###  https://bakerstreet.fandom.com/wiki/friend
+bs:friend rdf:type owl:NamedIndividual .
+
+
+###  https://bakerstreet.fandom.com/wiki/male
+bs:male rdf:type owl:NamedIndividual .
+
+
+###  https://bakerstreet.fandom.com/wiki/parent
+bs:parent rdf:type owl:NamedIndividual .
+
+
+###  https://bakerstreet.fandom.com/wiki/partner
+bs:partner rdf:type owl:NamedIndividual .
+
+
+###  https://bakerstreet.fandom.com/wiki/sibling
+bs:sibling rdf:type owl:NamedIndividual .
+
+
+###  https://bakerstreet.fandom.com/wiki/John_Watson_(Freeman)
+<https://bakerstreet.fandom.com/wiki/John_Watson_(Freeman)> rdf:type owl:NamedIndividual ,
+                                                                     bs:Character ;
+                                                            bs:Relationship [ ] ,
+[ ] ,
+[ ] ;
+bs:gender bs:male ;
+bs:portrayedBy bs:Martin_Freeman ;
+bs:nationality "British" ;
+rdfs:label "John Watson" ;
+bs:affiliation "Fifth Northumberland Fusiliers" ,
+               "Royal Army Medical Corps" ,
+               "Scotland Yard" ;
+bs:occupation "Army doctor" ,
+              "General Practicioner" ,
+              "Physician" .
+
+
+###  https://bakerstreet.fandom.com/wiki/Minor_Sherlock_characters#Harriet_Watson
+<https://bakerstreet.fandom.com/wiki/Minor_Sherlock_characters#Harriet_Watson> rdf:type owl:NamedIndividual ,
+                                                                                        bs:Character ;
+                                                                               bs:Relationship [ ] ;
+bs:gender bs:female ;
+bs:nationality "British" ;
+rdfs:label "Harriet Watson" .
+
+
+###  https://bakerstreet.fandom.com/wiki/Mr_Holmes_(Carlton)
+<https://bakerstreet.fandom.com/wiki/Mr_Holmes_(Carlton)> rdf:type owl:NamedIndividual ,
+                                                                   bs:Character ;
+                                                          bs:Relationship [ ] ,
+[ ] ,
+[ ] ,
+[ ] ;
+bs:gender bs:male ;
+bs:portrayedBy bs:Timothy_Carlton ;
+bs:nationality "British" ;
+rdfs:label "Mr Holmes" .
+
+
+###  https://bakerstreet.fandom.com/wiki/Mycroft_Holmes_(Gatiss)
+<https://bakerstreet.fandom.com/wiki/Mycroft_Holmes_(Gatiss)> rdf:type owl:NamedIndividual ,
+                                                                       bs:Character ;
+                                                              bs:Relationship [ ] ,
+[ ] ,
+[ ] ,
+[ ] ;
+bs:gender bs:male ;
+bs:portrayedBy bs:Aaron_Richards ,
+               bs:Mark_Gatiss ;
+bs:nationality "British" ;
+rdfs:label "Mycroft Holmes" ;
+bs:affiliation "British Government" ;
+bs:occupation "Government official" .
+
+
+###  https://en.everybodywiki.com/Tom_Stoughton
+ebw:Tom_Stoughton rdf:type owl:NamedIndividual .
+
+
+###  https://en.wikipedia.org/wiki/Benedict_Cumberbatch
+wp:Benedict_Cumberbatch rdf:type owl:NamedIndividual .
+
+
+###  https://en.wikipedia.org/wiki/Indica_Watson
+wp:Indica_Watson rdf:type owl:NamedIndividual .
+
+
+###  https://en.wikipedia.org/wiki/Sherlock_Holmes
+wp:Sherlock_Holmes rdf:type owl:NamedIndividual .
+
+
+[ rdf:type bs:Person
+] .
+
+[ rdf:type bs:Person
+ ] .
+
+[ bs:relationshipType bs:sibling
+ ] .
+
+_:genid55 bs:relationshipCharacter bs:Eurus_Holmes ;
+           bs:relationshipType bs:enemy ,
+                               bs:sibling .
+
+[ bs:relationshipType bs:parent
+ ] .
+
+_:genid57 bs:relationshipCharacter bs:Mrs_Holmes ;
+           bs:relationshipType bs:parent .
+
+_:genid58 bs:relationshipCharacter bs:Mrs_Holmes ;
+           bs:relationshipType bs:partner .
+
+[ bs:relationshipType bs:friend
+ ] .
+
+_:genid60 bs:relationshipCharacter bs:Jim_Moriarty ;
+           bs:relationshipType bs:enemy .
+
+[ bs:relationshipType bs:friend
+ ] .
+
+_:genid62 bs:relationshipCharacter bs:Jim_Moriarty ;
+           bs:relationshipType bs:enemy .
+
+[ bs:relationshipType bs:sibling
+ ] .
+
+_:genid64 bs:relationshipCharacter bs:Eurus_Holmes ;
+           bs:relationshipType bs:child .
+
+[ bs:relationshipType bs:child
+ ] .
+
+[ bs:relationshipType bs:child
+ ] .
+
+[ bs:relationshipType bs:sibling
+ ] .
+
+[ bs:relationshipType bs:sibling
+ ] .
+
+_:genid69 bs:relationshipCharacter bs:Eurus_Holmes ;
+           bs:relationshipType bs:enemy ,
+                               bs:sibling .
+
+[ bs:relationshipType bs:parent
+ ] .
+
+_:genid71 bs:relationshipCharacter bs:Mrs_Holmes ;
+           bs:relationshipType bs:parent .
+
+[ bs:relationshipCharacter <https://bakerstreet.fandom.com/wiki/Mycroft_Holmes_(Gatiss)>
+ ] .
+
+[ bs:relationshipCharacter <https://bakerstreet.fandom.com/wiki/Mycroft_Holmes_(Gatiss)>
+ ] .
+
+[ bs:relationshipCharacter <https://bakerstreet.fandom.com/wiki/Mycroft_Holmes_(Gatiss)>
+ ] .
+
+[ bs:relationshipCharacter <https://bakerstreet.fandom.com/wiki/Mycroft_Holmes_(Gatiss)>
+ ] .
+
+[ bs:relationshipCharacter bs:William_Sherlock_Scott_Holmes
+ ] .
+
+[ bs:relationshipCharacter bs:William_Sherlock_Scott_Holmes
+ ] .
+
+[ bs:relationshipCharacter bs:William_Sherlock_Scott_Holmes
+ ] .
+
+[ bs:relationshipCharacter bs:William_Sherlock_Scott_Holmes
+ ] .
+
+[ bs:relationshipCharacter bs:William_Sherlock_Scott_Holmes
+ ] .
+
+[ bs:relationshipCharacter bs:William_Sherlock_Scott_Holmes
+ ] .
+
+[ bs:relationshipCharacter <https://bakerstreet.fandom.com/wiki/Mr_Holmes_(Carlton)>
+ ] .
+
+[ bs:relationshipCharacter <https://bakerstreet.fandom.com/wiki/Mr_Holmes_(Carlton)>
+ ] .
+
+[ bs:relationshipCharacter <https://bakerstreet.fandom.com/wiki/Mr_Holmes_(Carlton)>
+ ] .
+
+[ bs:relationshipCharacter <https://bakerstreet.fandom.com/wiki/Mr_Holmes_(Carlton)>
+ ] .
+
+[ bs:relationshipCharacter <https://bakerstreet.fandom.com/wiki/John_Watson_(Freeman)>
+ ] .
+
+[ bs:relationshipCharacter <https://bakerstreet.fandom.com/wiki/John_Watson_(Freeman)>
+ ] .
+
+[ bs:relationshipCharacter <https://bakerstreet.fandom.com/wiki/John_Watson_(Freeman)>
+ ] .
+
+[ bs:relationshipCharacter <https://bakerstreet.fandom.com/wiki/Minor_Sherlock_characters#Harriet_Watson>
+ ] .
+
+#################################################################
+#    Annotations
+#################################################################
+
+bs:Actor rdfs:label "Actor" ;
+          rdfs:comment "Defines a person as an actor of a character." .
+
+
+bs:Character rdfs:label "Character" ;
+             rdfs:comment "Defines a person as a character of the show." .
+
+
+bs:Relationship rdfs:comment "Describes the relationship between two characters." ;
+                rdfs:label "Relationship" .
+
+
+bs:affiliation rdfs:label "Affiliation" ;
+               rdfs:comment "The affiliation of a character." .
+
+
+bs:child rdfs:label "child" .
+
+
+bs:enemy rdfs:label "enemy" .
+
+
+bs:female rdfs:label "female" .
+
+
+bs:friend rdfs:label "friend" .
+
+
+bs:gender rdfs:label "Gender" ;
+          rdfs:comment "Gender of a actor or character." .
+
+
+bs:male rdfs:label "male" .
+
+
+bs:occupation rdfs:comment "The occupation of a character." ;
+              rdfs:label "Occupation" .
+
+
+bs:parent rdfs:label "parent" .
+
+
+bs:partner rdfs:label "partner" .
+
+
+bs:portrayedBy rdfs:label "Portrayed by" ;
+               rdfs:comment "List of actors playing a character." .
+
+
+bs:portrays rdfs:label "Portrays" ;
+            rdfs:comment "List of characters this actor plays." .
+
+
+bs:relationshipType rdfs:label "Relationship type" ;
+                    rdfs:comment "Describes the type of relationship." .
+
+
+bs:sibling rdfs:label "sibling" .
+
+
+###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi

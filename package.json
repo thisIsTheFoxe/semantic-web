@@ -4,7 +4,8 @@
   "description": "Turtle and OWL ontologies",
   "main": "index.js",
   "scripts": {
-    "ttl": "ttl RDFS/rdfs.ttl"
+    "rdfs": "ttl RDFS/rdfs.ttl",
+    "owl": "ttl OWL/owl.ttl"
   },
   "repository": {
     "type": "git",
