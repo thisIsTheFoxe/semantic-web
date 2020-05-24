@@ -103,11 +103,15 @@
 
 ###  https://bakerstreet.fandom.com/wiki/Actor
 :Actor rdf:type owl:Class ;
-       rdfs:subClassOf :Person .
+       rdfs:subClassOf :Person ;
+       owl:disjointWith :Character .
 
 
 ###  https://bakerstreet.fandom.com/wiki/Affiliation
-:Affiliation rdf:type owl:Class .
+:Affiliation rdf:type owl:Class ;
+             owl:disjointWith :Gender ,
+                              :Occupation ,
+                              :Person .
 
 
 ###  https://bakerstreet.fandom.com/wiki/Character
@@ -116,7 +120,9 @@
 
 
 ###  https://bakerstreet.fandom.com/wiki/Gender
-:Gender rdf:type owl:Class .
+:Gender rdf:type owl:Class ;
+        owl:disjointWith :Occupation ,
+                         :Person .
 
 
 ###  https://bakerstreet.fandom.com/wiki/IllegalOccupation
@@ -131,7 +137,8 @@
 
 
 ###  https://bakerstreet.fandom.com/wiki/Occupation
-:Occupation rdf:type owl:Class .
+:Occupation rdf:type owl:Class ;
+            owl:disjointWith :Person .
 
 
 ###  https://bakerstreet.fandom.com/wiki/Person
@@ -187,22 +194,35 @@
                     :LegalOccupation .
 
 
+###  https://bakerstreet.fandom.com/wiki/Doctor
+:Doctor rdf:type owl:NamedIndividual ,
+                 :LegalOccupation .
+
+
 ###  https://bakerstreet.fandom.com/wiki/Eurus_Holmes
 :Eurus_Holmes rdf:type owl:NamedIndividual ,
                        :Character ;
-              :enemy :John_Watson ,
-                     :William_Sherlock_Scott_Holmes ,
+              :enemy :William_Sherlock_Scott_Holmes ,
+                     <https://bakerstreet.fandom.com/wiki/John_Watson_(Freeman)> ,
                      <https://bakerstreet.fandom.com/wiki/Mycroft_Holmes_(Gatiss)> ;
               :friend :Jim_Moriarty ;
               :gender :female ;
               :hasAffiliation :Sherrinford ;
-              :hasOccupation :Criminal ;
+              :hasOccupation :Criminal ,
+                             :Patient ,
+                             :Prisoner ;
               :parent :Mrs_Holmes ,
                       <https://bakerstreet.fandom.com/wiki/Mr_Holmes_(Carlton)> ;
               :sibling :William_Sherlock_Scott_Holmes ,
                        <https://bakerstreet.fandom.com/wiki/Mycroft_Holmes_(Gatiss)> ;
               :nationality "British" ;
               rdfs:label "Eurus Holmes" .
+
+
+###  https://bakerstreet.fandom.com/wiki/General_Practicioner
+:General_Practicioner rdf:type owl:NamedIndividual ,
+                               :LegalOccupation ;
+                      rdfs:label "General Practicioner" .
 
 
 ###  https://bakerstreet.fandom.com/wiki/GovernmentOfficial
@@ -214,22 +234,14 @@
 ###  https://bakerstreet.fandom.com/wiki/Jim_Moriarty
 :Jim_Moriarty rdf:type owl:NamedIndividual ,
                        :Character ;
-              :enemy :John_Watson ,
-                     :William_Sherlock_Scott_Holmes ;
+              :enemy :William_Sherlock_Scott_Holmes ,
+                     <https://bakerstreet.fandom.com/wiki/John_Watson_(Freeman)> ;
               :friend :Eurus_Holmes ;
+              :gender :male ;
+              :hasOccupation :Criminal ;
+              :portrayedBy :Andrew_Scott ;
               :nationality "Irish" ;
               rdfs:label "Jim Moriarty" .
-
-
-###  https://bakerstreet.fandom.com/wiki/John_Watson
-:John_Watson rdf:type owl:NamedIndividual ,
-                      :Character ;
-             :enemy :Eurus_Holmes ,
-                    :Jim_Moriarty ;
-             :friend :William_Sherlock_Scott_Holmes ;
-             :gender :male ;
-             :nationality "British" ;
-             rdfs:label "John Watson" .
 
 
 ###  https://bakerstreet.fandom.com/wiki/Mark_Gatiss
@@ -238,6 +250,14 @@
              :gender :male ;
              :portrays <https://bakerstreet.fandom.com/wiki/Mycroft_Holmes_(Gatiss)> ;
              rdfs:label "Mark Gatiss" .
+
+
+###  https://bakerstreet.fandom.com/wiki/Martin_Freeman
+:Martin_Freeman rdf:type owl:NamedIndividual ,
+                         :Actor ;
+                :gender :male ;
+                :portrays <https://bakerstreet.fandom.com/wiki/John_Watson_(Freeman)> ;
+                rdfs:label "Martin Freeman" .
 
 
 ###  https://bakerstreet.fandom.com/wiki/Mrs_Holmes
@@ -253,9 +273,19 @@
             rdfs:label "Mrs Holmes" .
 
 
+###  https://bakerstreet.fandom.com/wiki/Patient
+:Patient rdf:type owl:NamedIndividual ,
+                  :LegalOccupation .
+
+
 ###  https://bakerstreet.fandom.com/wiki/Physician
 :Physician rdf:type owl:NamedIndividual ,
                     :LegalOccupation .
+
+
+###  https://bakerstreet.fandom.com/wiki/Prisoner
+:Prisoner rdf:type owl:NamedIndividual ,
+                   :IllegalOccupation .
 
 
 ###  https://bakerstreet.fandom.com/wiki/Scotland_Yard
@@ -266,7 +296,8 @@
 
 ###  https://bakerstreet.fandom.com/wiki/Sherrinford
 :Sherrinford rdf:type owl:NamedIndividual ,
-                      :Affiliation .
+                      :Affiliation ;
+             rdfs:comment "Sherrinford is a secret prison located in secured waters somewhere off the British Islands." .
 
 
 ###  https://bakerstreet.fandom.com/wiki/Timothy_Carlton
@@ -290,7 +321,7 @@
                                         :Character ;
                                :enemy :Eurus_Holmes ,
                                       :Jim_Moriarty ;
-                               :friend :John_Watson ;
+                               :friend <https://bakerstreet.fandom.com/wiki/John_Watson_(Freeman)> ;
                                :gender :male ;
                                :hasAffiliation :Scotland_Yard ;
                                :hasOccupation :Chemist ,
@@ -312,6 +343,22 @@
 ###  https://bakerstreet.fandom.com/wiki/male
 :male rdf:type owl:NamedIndividual ,
                :Gender .
+
+
+###  https://bakerstreet.fandom.com/wiki/John_Watson_(Freeman)
+<https://bakerstreet.fandom.com/wiki/John_Watson_(Freeman)> rdf:type owl:NamedIndividual ,
+                                                                     :Character ;
+                                                            :enemy :Eurus_Holmes ,
+                                                                   :Jim_Moriarty ;
+                                                            :friend :William_Sherlock_Scott_Holmes ;
+                                                            :gender :male ;
+                                                            :hasAffiliation :Scotland_Yard ;
+                                                            :hasOccupation :Doctor ,
+                                                                           :General_Practicioner ,
+                                                                           :Physician ;
+                                                            :portrayedBy :Martin_Freeman ;
+                                                            :nationality "British" ;
+                                                            rdfs:label "John Watson" .
 
 
 ###  https://bakerstreet.fandom.com/wiki/Mr_Holmes_(Carlton)
