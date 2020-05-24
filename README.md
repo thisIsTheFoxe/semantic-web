@@ -17,3 +17,7 @@ Ontology about the characters of the BBC TV series 'Sherlock' taken from [Bakers
 5. Run queries in [`sparql.rq`](/RDFS/sparql.rq)
 
 ## OWL
+
+Same ontology as in [RDFS](#rdfs) but more complicated.
+
+[`owl.ttl`](/OWL/owl.ttl)
