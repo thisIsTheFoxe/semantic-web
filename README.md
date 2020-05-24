@@ -26,7 +26,7 @@ Same ontology as in [RDFS](#rdfs) but more complicated.
 
 | Type | Natural speech | DL query | Result |
 | --- | --- | --- | --- |
-| **Subsumption** | Does `Actor` &#8838; `Person` apply? | `Actor and Person` | 7 instances |
-| **Instance** | Does `Sherlock_Holmes` belong to class `Person`? | `Person and rdfs:label value "Sherlock Holmes"` | 1 instance |
+| **Subsumption** | Does `Actor` &#8838; `Person` apply? | `Actor and Person` | 7&nbsp;instances |
+| **Instance** | Does `Sherlock_Holmes` belong to class `Person`? | `Person and rdfs:label value "Sherlock Holmes"` | 1&nbsp;instance |
 | **Property instance** | Is John Watson a friend of Eurus Holmes? | `rdfs:label value "John Watson" and friend value 'Eurus Holmes'` | :x: |
-| **Property extension** | Which siblings are enemies? | `sibling some Character and enemy some Character` | 3 instances |
+| **Property extension** | Which siblings are enemies? | `sibling some Character and enemy some Character` | 3&nbsp;instances |
