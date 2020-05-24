@@ -21,3 +21,12 @@ Ontology about the characters of the BBC TV series 'Sherlock' taken from [Bakers
 Same ontology as in [RDFS](#rdfs) but more complicated.
 
 [`owl.ttl`](/OWL/owl.ttl)
+
+### Conclusions
+
+| Type | Natural speech | DL query |
+| --- | --- | --- |
+| **Subsumption** | Does `Actor` &#8838; `Person` apply? | `Actor and Person` |
+| **Instance** | Does `Sherlock_Holmes` belong to class `Person`? | `Person and rdfs:label value "Sherlock Holmes"` |
+| **Property instance** | Is John Watson a friend of Eurus Holmes? | `rdfs:label value "John Watson" and friend value 'Eurus Holmes'` |
+| **Property extension** | Which siblings are enemies? | `sibling some Character and enemy some Character` |
