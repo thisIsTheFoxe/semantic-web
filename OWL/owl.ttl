@@ -14,7 +14,7 @@
 
 ###  https://bakerstreet.fandom.com/wiki/child
 :child rdf:type owl:ObjectProperty ;
-       rdfs:subPropertyOf :relationship ;
+       rdfs:subPropertyOf :family ;
        owl:inverseOf :parent .
 
 
@@ -23,6 +23,11 @@
        rdfs:subPropertyOf :relationship ;
        rdf:type owl:SymmetricProperty ;
        owl:propertyDisjointWith :friend .
+
+
+###  https://bakerstreet.fandom.com/wiki/family
+:family rdf:type owl:ObjectProperty ;
+        rdfs:subPropertyOf :relationship .
 
 
 ###  https://bakerstreet.fandom.com/wiki/friend
@@ -52,7 +57,7 @@
 
 ###  https://bakerstreet.fandom.com/wiki/parent
 :parent rdf:type owl:ObjectProperty ;
-        rdfs:subPropertyOf :relationship .
+        rdfs:subPropertyOf :family .
 
 
 ###  https://bakerstreet.fandom.com/wiki/portrayedBy
@@ -77,13 +82,13 @@
 
 ###  https://bakerstreet.fandom.com/wiki/sibling
 :sibling rdf:type owl:ObjectProperty ;
-         rdfs:subPropertyOf :relationship ;
+         rdfs:subPropertyOf :family ;
          rdf:type owl:SymmetricProperty .
 
 
 ###  https://bakerstreet.fandom.com/wiki/spouse
 :spouse rdf:type owl:ObjectProperty ;
-        rdfs:subPropertyOf :relationship ;
+        rdfs:subPropertyOf :family ;
         rdf:type owl:SymmetricProperty .
 
 
