@@ -8,6 +8,8 @@ Ontology about the characters of the BBC TV series 'Sherlock' taken from [Bakers
 
 [`rdfs.ttl`](/RDFS/rdfs.ttl)
 
+The generated RDF graph can be seen [here](http://www.thisisthefoxe.me/semantic-web/)
+
 ### SPARQL
 
 1. Start apache fuseki server with docker: `docker-compose up --build --detach`
