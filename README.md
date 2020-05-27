@@ -8,7 +8,7 @@ Ontology about the characters of the BBC TV series 'Sherlock' taken from [Bakers
 
 [`rdfs.ttl`](/RDFS/rdfs.ttl)
 
-The generated RDF graph can be found [here].(http://www.thisisthefoxe.me/semantic-web/)
+The generated RDF graph can be found [here](http://www.thisisthefoxe.me/semantic-web/).
 
 ### SPARQL
 
